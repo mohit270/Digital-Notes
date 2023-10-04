@@ -1,8 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digital_note/app_style.dart';
 import 'package:flutter/material.dart';
 
 Widget noteCard(
-    Function()? onTap, Function()? onLongPressed, Map<String, dynamic> user) {
+    Function()? onTap, Function()? onLongPressed, DocumentSnapshot? user) {
   return InkWell(
     onTap: onTap,
     onLongPress: onLongPressed,
@@ -10,7 +11,7 @@ Widget noteCard(
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: App_Style.cardsColor[int.parse(user['color_id'])],
+        color: App_Style.cardsColor[int.parse(user!['color_id'])],
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

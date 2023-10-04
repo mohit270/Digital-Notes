@@ -4,41 +4,43 @@ import 'package:digital_note/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class CreateNote extends StatefulWidget {
-  const CreateNote({super.key});
+class UpdateScreen extends StatefulWidget {
+  const UpdateScreen({super.key, this.user});
+  final DocumentSnapshot? user;
 
   @override
-  State<CreateNote> createState() => _CreateNoteState();
+  State<UpdateScreen> createState() => _UpdateScreenState();
 }
 
-class _CreateNoteState extends State<CreateNote> {
-  final int color_id = Random().nextInt(App_Style.cardsColor.length);
-  final TextEditingController note_content = TextEditingController();
-  final TextEditingController note_titile = TextEditingController();
-  final String creationdate = DateTime.now().toString();
+class _UpdateScreenState extends State<UpdateScreen> {
+  DocumentSnapshot? get documentSnapshot => widget.user;
+  int color_id = Random().nextInt(App_Style.cardsColor.length);
+  TextEditingController note_content = TextEditingController();
+  TextEditingController note_titile = TextEditingController();
+  String creationdate = DateTime.now().toString();
+  final CollectionReference Notes =
+      FirebaseFirestore.instance.collection('Notes');
 
-  void saveUser() {
+  @override
+  void initState() {
+    super.initState();
+    note_content.text = documentSnapshot?['note_content'] ?? '';
+    note_titile.text = documentSnapshot?['note_titile'] ?? '';
+    creationdate = documentSnapshot?['creation_date'] ?? '';
+    color_id = int.tryParse(documentSnapshot?['color_id']) ??
+        0; // Provide a default value if needed
+  }
+
+  void updateUser() {
     // ignore: unnecessary_null_comparison
     if (note_content != null || note_titile != null) {
-      FirebaseFirestore.instance.collection('Notes').add({
+      Notes.doc(widget.user!.id).update({
         'note_titile': note_titile.text.trim(),
         'note_content': note_content.text.trim(),
         'color_id': "$color_id",
-        'creation_date': creationdate.toString().trim()
+        'creation_date': DateTime.now().toString()
       });
       Navigator.pop(context);
-    } else {
-      final snackBar = SnackBar(
-        content: Center(
-          child: Text(
-            'Fill Note Title',
-            style: App_Style.mainTitle,
-          ),
-        ),
-        duration: const Duration(seconds: 1),
-        backgroundColor: Colors.blueGrey.shade600,
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
 
@@ -53,7 +55,7 @@ class _CreateNoteState extends State<CreateNote> {
         actions: [
           TextButton(
               onPressed: () {
-                saveUser();
+                updateUser();
               },
               child: const Icon(
                 Icons.save_alt,
@@ -94,6 +96,14 @@ class _CreateNoteState extends State<CreateNote> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.black,
+        onPressed: () {
+          updateUser();
+        },
+        label: const Text('Update Node'),
+        icon: const Icon(Icons.add),
       ),
     );
   }
