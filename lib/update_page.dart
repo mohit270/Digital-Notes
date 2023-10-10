@@ -43,7 +43,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
         'note_titile': note_titile.text.trim(),
         'note_content': note_content.text.trim(),
         'color_id': "$color_id",
-        'creation_date': DateTime.now().toString()
+        'creation_date': creationdate,
       });
       Navigator.pop(context);
     }
