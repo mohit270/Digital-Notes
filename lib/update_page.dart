@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:digital_note/app_style.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class UpdateScreen extends StatefulWidget {
   const UpdateScreen({super.key, this.user});
@@ -17,13 +19,16 @@ class _UpdateScreenState extends State<UpdateScreen> {
   int color_id = Random().nextInt(App_Style.cardsColor.length);
   TextEditingController note_content = TextEditingController();
   TextEditingController note_titile = TextEditingController();
-  String creationdate = DateTime.now().toString();
-  final CollectionReference Notes =
-      FirebaseFirestore.instance.collection('Notes');
+  String creationdate = DateFormat('hh:mm a dd:MM:yy').format(DateTime.now());
+  String? email;
+  late final CollectionReference Notes;
 
   @override
   void initState() {
     super.initState();
+    final User? currUser = FirebaseAuth.instance.currentUser;
+    email = currUser != null ? currUser.email : '';
+    Notes = FirebaseFirestore.instance.collection(email!);
     note_content.text = documentSnapshot?['note_content'] ?? '';
     note_titile.text = documentSnapshot?['note_titile'] ?? '';
     creationdate = documentSnapshot?['creation_date'] ?? '';
@@ -51,17 +56,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
         elevation: 0.0,
         centerTitle: true,
         backgroundColor: Colors.black,
-        title: const Text('Add Note'),
-        actions: [
-          TextButton(
-              onPressed: () {
-                updateUser();
-              },
-              child: const Icon(
-                Icons.save_alt,
-                color: Colors.white,
-              ))
-        ],
+        title: const Text('Update Note'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -73,13 +68,6 @@ class _UpdateScreenState extends State<UpdateScreen> {
               style: App_Style.mainTitle,
               decoration: const InputDecoration(
                   hintText: 'Note Title', border: InputBorder.none),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Text(
-              creationdate,
-              style: App_Style.dateTitle,
             ),
             const SizedBox(
               height: 28,

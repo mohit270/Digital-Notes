@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:digital_note/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import "package:firebase_auth/firebase_auth.dart";
+import 'package:intl/intl.dart';
 
 class CreateNote extends StatefulWidget {
   const CreateNote({super.key});
@@ -15,12 +17,13 @@ class _CreateNoteState extends State<CreateNote> {
   final int color_id = Random().nextInt(App_Style.cardsColor.length);
   final TextEditingController note_content = TextEditingController();
   final TextEditingController note_titile = TextEditingController();
-  final String creationdate = DateTime.now().toString();
-
+  final String creationdate =
+      DateFormat('hh:mm a dd:MM:yy').format(DateTime.now());
+  final String email = FirebaseAuth.instance.currentUser!.email.toString();
   void saveUser() {
     // ignore: unnecessary_null_comparison
     if (note_content != null || note_titile != null) {
-      FirebaseFirestore.instance.collection('Notes').add({
+      FirebaseFirestore.instance.collection(email).add({
         'note_titile': note_titile.text.trim(),
         'note_content': note_content.text.trim(),
         'color_id': "$color_id",

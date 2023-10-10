@@ -4,7 +4,7 @@
             "outputFile": "com.example.digital_note.app-mergeDebugResources-15:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/Users/ezybuysellstore/Desktop/flutter_app/flutterPractice/digital_not/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/Users/ezybuysellstore/Desktop/yoga app giff/digital_note/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

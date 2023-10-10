@@ -3,7 +3,6 @@ import 'package:digital_note/note_card.dart';
 import 'package:digital_note/update_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,8 +13,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final CollectionReference Notes =
-      FirebaseFirestore.instance.collection('Notes');
+  String? email;
+  late CollectionReference Notes;
+  @override
+  void initState() {
+    super.initState();
+    final User? currUser = FirebaseAuth.instance.currentUser;
+    email = currUser != null ? currUser.email : '';
+    Notes = FirebaseFirestore.instance.collection(email!);
+  }
+
   Future<void> _delete(String productId) async {
     await Notes.doc(productId).delete();
 
@@ -26,8 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final User? ur = FirebaseAuth.instance.currentUser;
-    final CollectionReference Notes =
-        FirebaseFirestore.instance.collection('Notes');
     return Scaffold(
       appBar: AppBar(
         title: const Text('home'),
@@ -66,10 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ConnectionState.active) {
                     if (streamSnapshot.hasData && streamSnapshot.data != null) {
                       return Expanded(
-                        child: GridView.builder(
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2),
+                        child: ListView.builder(
+                            shrinkWrap: true,
                             itemBuilder: (context, index) {
                               final DocumentSnapshot user =
                                   streamSnapshot.data!.docs[index];

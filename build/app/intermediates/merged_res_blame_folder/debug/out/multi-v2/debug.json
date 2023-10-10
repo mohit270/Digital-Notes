@@ -4374,7 +4374,7 @@
                     }
                 },
                 {
-                    "source": "/Users/ezybuysellstore/Desktop/flutter_app/flutterPractice/digital_not/android/app/src/main/res/values/styles.xml",
+                    "source": "/Users/ezybuysellstore/Desktop/yoga app giff/digital_note/android/app/src/main/res/values/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
@@ -4412,6 +4412,23 @@
                     }
                 },
                 {
+                    "source": "/Users/ezybuysellstore/Desktop/yoga app giff/digital_note/build/app/generated/res/google-services/debug/values/values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,137,241,350,470,572",
+                        "endColumns": "81,103,108,119,101,78",
+                        "endOffsets": "132,236,345,465,567,646"
+                    },
+                    "to": {
+                        "startLines": "129,130,131,132,133,134",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "9188,9270,9374,9483,9603,9705",
+                        "endColumns": "81,103,108,119,101,78",
+                        "endOffsets": "9265,9369,9478,9598,9700,9779"
+                    }
+                },
+                {
                     "source": "/Users/ezybuysellstore/.gradle/caches/transforms-3/3df77d3f0e42ee5d73cdfadb8bcdc01c/transformed/browser-1.4.0/res/values/values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11",
@@ -4426,23 +4443,6 @@
                         "startOffsets": "661,719,785,848,1713,1784,8905,8973,9040,9119",
                         "endColumns": "57,65,62,61,70,71,67,66,78,68",
                         "endOffsets": "714,780,843,905,1779,1851,8968,9035,9114,9183"
-                    }
-                },
-                {
-                    "source": "/Users/ezybuysellstore/Desktop/flutter_app/flutterPractice/digital_not/build/app/generated/res/google-services/debug/values/values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "55,137,241,350,470,572",
-                        "endColumns": "81,103,108,119,101,78",
-                        "endOffsets": "132,236,345,465,567,646"
-                    },
-                    "to": {
-                        "startLines": "129,130,131,132,133,134",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "9188,9270,9374,9483,9603,9705",
-                        "endColumns": "81,103,108,119,101,78",
-                        "endOffsets": "9265,9369,9478,9598,9700,9779"
                     }
                 },
                 {
@@ -5792,7 +5792,7 @@
             "outputFile": "com.example.digital_note.app-merged_res-17:/values-night-v8_values-night-v8.arsc.flat",
             "map": [
                 {
-                    "source": "/Users/ezybuysellstore/Desktop/flutter_app/flutterPractice/digital_not/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/Users/ezybuysellstore/Desktop/yoga app giff/digital_note/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

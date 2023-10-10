@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // FirebaseFirestore firestore = FirebaseFirestore.instance;
-
   runApp(const Home());
 }
 
@@ -22,55 +20,3 @@ class Home extends StatelessWidget {
     );
   }
 }
-
-
-
-//copy
-// actions: [
-//   Builder(builder: (context) {
-//     return IconButton(
-//         onPressed: () async {
-//           await FlutterClipboard.copy(_text);
-//           ScaffoldMessenger.of(context).showSnackBar(
-//               const SnackBar(content: Text(' Copied to Clipboard')));
-//         },
-//         icon: const Icon(Icons.content_copy));
-//   }),
-// ],
-
-//below app
-// floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-// floatingActionButton: AvatarGlow(
-//     endRadius: 75.0,
-//     animate: _isListening,
-//     glowColor: Theme.of(context).primaryColor,
-//     duration: const Duration(milliseconds: 2000),
-//     repeatPauseDuration: const Duration(milliseconds: 100),
-//     repeat: true,
-//     child: FloatingActionButton(
-//         onPressed: _listen,
-//         child: Icon(_isListening ? Icons.mic : Icons.mic_none))),
-
-// below scaffold
-// void _listen() async {
-//   if (!_isListening) {
-//     bool available = await _speech.initialize(
-//       onStatus: (val) => print('onStatus: $val'),
-//       onError: (val) {
-//         print('onError: $val');
-//       },
-//     );
-//     if (available) {
-//       setState(() => _isListening = true);
-//       _speech.listen(
-//           onResult: (val) => setState(() {
-//                 _text = val.recognizedWords;
-//                 if (val.hasConfidenceRating && val.confidence > 0) {
-//                   _confidence = val.confidence;
-//                 }
-//               }));int.parse(widget.user['color-id']);
-//     }
-//   } else {
-//     setState(() => _isListening = false);
-//     _speech.stop();
-//   } 
