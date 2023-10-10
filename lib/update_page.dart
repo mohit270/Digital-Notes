@@ -19,6 +19,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
   int color_id = Random().nextInt(App_Style.cardsColor.length);
   TextEditingController note_content = TextEditingController();
   TextEditingController note_titile = TextEditingController();
+  String date = DateFormat('hh:mm a dd:MM:yy').format(DateTime.now());
   String creationdate = DateFormat('hh:mm a dd:MM:yy').format(DateTime.now());
   String? email;
   late final CollectionReference Notes;
@@ -43,7 +44,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
         'note_titile': note_titile.text.trim(),
         'note_content': note_content.text.trim(),
         'color_id': "$color_id",
-        'creation_date': creationdate,
+        'creation_date': date,
       });
       Navigator.pop(context);
     }
@@ -68,6 +69,10 @@ class _UpdateScreenState extends State<UpdateScreen> {
               style: App_Style.mainTitle,
               decoration: const InputDecoration(
                   hintText: 'Note Title', border: InputBorder.none),
+            ),
+            Text(
+              creationdate,
+              style: App_Style.dateTitle,
             ),
             const SizedBox(
               height: 28,
